@@ -1,28 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Expériences</title>
 
     <style>
-      body {
-        background-color: #e9ebee;
-        font-family: system, -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
-        font-size: 16px;
-        margin: 0 auto;
-        max-width: 800px;
-      }
+        body {
+            background-color: #e9ebee;
+            font-family: system, -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+            font-size: 16px;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+        
+        table {
+            width: 100%;
+        }
+        
+        #img1 {
+            height: 50px;
+        }
+        
+        #center {
+            text-align: center;
+        }
+        
+        .empty-raw {
+            height: 25px;
+        }
     </style>
-  </head>
-  <body>
-    <h1>Expériences</h1>
+</head>
 
-    <p>blabla</p>
-    Outils utilisés :
-    <ul>
-      <li>Github</li>
-      <li>VSCODE</li>
-    </ul>
-  </body>
+<body>
+    <table border="1">
+        <tr>
+            <td>FALL Serigne Amouyakar</td>
+            <td>Célibataire</td>
+        </tr>
+        <tr>
+            <td>93 Villetaneuse</td>
+            <td>Permis B</td>
+        </tr>
+        <tr class="empty-raw">
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td><a href="#">serigne.amouyakar@uspn.fr</a></td>
+            <td></td>
+        </tr>
+    </table>
+    <h1 id="center">Ingénieur d'études et développement</h1>
+    <h1>Formations</h1>
+    <table border="1">
+        <tr>
+            <td>2016</td>
+            <td>Master 3IR à l'Université Paris III </td>
+        </tr>
+        <tr>
+            <td>2014</td>
+            <td>Licence Telecom à l'Université Paris III</td>
+        </tr>
+        <tr>
+            <td>2011</td>
+            <td>Bac S</td>
+        </tr>
+    </table>
+
+    <h1>Compétences</h1>
+
+    <table border="1">
+        <tr>
+            <td>Développement</td>
+            <td>JAVA 7; HTML</td>
+        </tr>
+        <tr>
+            <td>Bases de données</td>
+            <td>MySQL, PostgreSQL</td>
+        </tr>
+        <tr>
+            <td>Réseaux</td>
+            <td>IPV6, LAN, WIFI </td>
+        </tr>
+        <tr>
+            <td>Langues</td>
+            <td>Anglais: bilingue, Français : langue maternelle</td>
+        </tr>
+    </table>
+
+    <h1>Expériences</h1>
+    <table border="1">
+        <tr>
+            <td>2016</td>
+            <td>Stage de fin d'études chez <img id="img1" src="../../orange.png" alt="Logo Orange" /> </td>
+        </tr>
+        <tr>
+            <td>2014</td>
+            <td>Stage chez <img id="img1" src="../../edf.png" alt="Logo EDF" /></td>
+        </tr>
+        <tr>
+            <td>2011</td>
+            <td>Bac S</td>
+        </tr>
+    </table>
+
+    <h1>Centres d'intérêts</h1>
+    <table border="1">
+        <tr>
+            <td>Sport</td>
+            <td>Running, Volley-Ball</td>
+        </tr>
+        <tr>
+            <td>Culture</td>
+            <td>Cinéma, Musée</td>
+        </tr>
+        <tr>
+            <td>Voyages</td>
+            <td>Angleterre, Espagne</td>
+        </tr>
+    </table>
+</body>
+
 </html>
