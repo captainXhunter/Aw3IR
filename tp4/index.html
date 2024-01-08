@@ -1,33 +1,172 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>TP4</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <!-- Place favicon.ico in the root directory -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>TP4</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <style>
-          body{
-              background-color: #e9ebee;              
-              font-family: system, -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
-              font-size: 16px;
-              margin: 0 auto;
-              max-width: 800px;              
-          }
-        </style>
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/gps.js"></script>
+    <style>
+        body {
+            /* background-color: #e9ebee; */
+            font-family: system, -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+            font-size: 16px;
+            margin: 0 auto;
+            max-width: 800px;
+        }
         
-        <!-- Code à dé-commenter si besoin de fichier CSS ou JS -->
-        <!--<link rel="stylesheet" href="style.css">-->
-        <!--<script src="main.js"></script>-->
-    </head>
-    <body>        
-        <h1>TP4</h1>
-        <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
-        <img src="../galilee.png" alt="Logo Galilee"/>
-    </body>
+        .en {
+            text-align: end;
+        }
+        
+        input[type="date"]::-webkit-inner-spin-button,
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            display: none;
+            -webkit-appearance: none;
+        }
+        
+        .valid {
+            height: 50%;
+            width: 10%;
+        }
+    </style>
+
+    <!-- Code à dé-commenter si besoin de fichier CSS ou JS -->
+    <!--<link rel="stylesheet" href="style.css">-->
+    <!--<script src="main.js"></script>-->
+</head>
+
+<body>
+    <div class="container mb-3">
+        <h1>TP4 AW</h1>
+        <p class="col-form-label col-form-label-lg">HTML5: GPS, Local Storage</p>
+        <h3>Ajouter Contact</h3>
+        <form class="mt-3">
+
+            <div class="row mb-3">
+                <div class="col-3 en">
+                    <label for="nom" class="form-label col-form-label"><b>Nom</b></label>
+                </div>
+                <div class="col-8 d-flex">
+                    <input type="text" onchange="validateOthers(this.id)" onclick="count_caracteres_inv(this.id)" onkeypress="count_caracteres(this.id)" name="nom" class="form-control form-control" id="nom">
+                    <span style="margin-left:10px; align-self: center;"></span>
+                </div>
+                <div id="spannom" class="col-1">
+                    <span style="margin-left:10px; align-self: center;"></span>
+                </div>
+            </div>
+
+
+            <div class="row mb-3">
+                <div class="col-3 en">
+                    <label for="prenom" class="form-label col-form-label"><b>Prenom</b></label>
+                </div>
+                <div class="col-8 d-flex">
+                    <input type="text" onchange="validateOthers(this.id)" onclick="count_caracteres_inv(this.id)" onkeypress="count_caracteres(this.id)" name="prenom" class="form-control form-control" id="prenom">
+                    <span style="margin-left:10px; align-self: center;"></span>
+                </div>
+                <div id="spanprenom" class="col-1">
+                    <span style="margin-left:10px; align-self: center;"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-3 en">
+                    <label for="date" class="form-label col-form-label"><b>Date de naissance</b></label>
+                </div>
+                <div class="col-8 col-sm-8 d-flex">
+                    <input type="date" onchange="validateDate()" onkeypress="count_caracteres(this.id)" name="date" class="form-control form-control" id="date">
+                    <span style="margin-left:10px; align-self: center;"></span>
+                </div>
+                <div id="spandate" class="col-1">
+                    <span style="margin-left:10px; align-self: center;"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-3 en">
+                    <label for="adresse" class="form-label col-form-label"><b>Adresse</b></label>
+                </div>
+                <div class="col-6 d-flex">
+                    <input type="text" onchange="validateAdresse(this.id)" onclick="count_caracteres_inv(this.id)" onkeypress="count_caracteres(this.id)" name="adresse" class="form-control form-control" id="adresse">
+                    <span id="addr" style="margin-left:10px; align-self: center;"></span>
+                </div>
+                <div class="col-2">
+                    <button type="button" class="btn btn-warning" id="gps">📍GPS</button>
+                </div>
+                <div id="spanadresse" class="col-1">
+                    <span style="margin-left:10px; align-self: center;"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6 mb-3" id="map" style="display: none;">
+                    <img height="250px" src="https://maps.googleapis.com/maps/api/staticmap?markers=latitude,longitude&zoom=14&size=400x300&scale=2&key=AIzaSyAkmvI9DazzG9p77IShsz_Di7-5Qn7zkcg" alt="image maps">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-3 en">
+                    <label for="mail" class="form-label col-form-label"><b>Email</b></label>
+                </div>
+                <div class="col-8 d-flex">
+                    <input type="text" onchange="validateEmail()" onclick="count_caracteres_inv(this.id)" onkeypress="count_caracteres(this.id)" name="mail" class="form-control form-control" id="mail">
+                    <span style="margin-left:10px; align-self: center;"></span>
+                </div>
+                <div id="spanmail" class="col-1">
+                    <span style="margin-left:10px; align-self: center;"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3"></div>
+                <button type="button" onclick="validation()" class="btn btn-primary col-2 ml-01 valid">Valider</button>
+                <div class="ml-01 col-6 alert alert-success" id="message" style="display: none;" role="alert">
+                    Bravo! le formulaire est sauvegardé
+                </div>
+            </div>
+        </form>
+        <div id="liste" style="display: none;">
+            <h3 class="mt-3">Liste des conacts</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Date de naissance</th>
+                        <th>Adresse</th>
+                        <th>Mail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">...</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/form-validation.js"></script>
+<script src="js/store.js"></script>
+
 </html>
